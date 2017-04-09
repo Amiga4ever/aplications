@@ -1,0 +1,251 @@
+<!DOCTYPE HTML>
+<meta charset="utf-8">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> Mój trening</title>
+	<link rel="stylesheet" href="main.css">
+	 <script type="text/javascript" charset="utf-8" src="js/jquery-3.1.1.js"></script>
+
+   <link href="css/bootstrap.min.css" rel="stylesheet">
+   <script src="js/bootstrap.min.js"></script>
+
+  <audio id="click" src="sfx/multiplay.wav"></audio>
+	  <audio id="accept" src="sfx/accept.wav"></audio>
+		  <audio id="multiplay" src="sfx/click.wav"></audio>
+
+
+
+
+<script>
+var value= " ";
+var value_memory = " ";
+var value_temp=" ";
+var what = "nic";
+var number="0";
+function load()
+{
+
+
+
+function show_numbers()
+{
+value = value + number;
+value_temp = value_temp + number;
+document.getElementById('click').play();
+document.getElementById("lcd").innerHTML = value;
+}
+
+
+
+  document.getElementById("1").addEventListener("click", function(){
+  number = "1";
+  show_numbers();
+  });
+  document.getElementById("2").addEventListener("click", function(){
+  number = "2";
+  show_numbers();
+  });
+  document.getElementById("3").addEventListener("click", function(){
+  number = "3";
+  show_numbers();
+  });
+  document.getElementById("4").addEventListener("click", function(){
+  number = "4";
+  show_numbers();
+  });
+  document.getElementById("5").addEventListener("click", function(){
+  number = "5";
+  show_numbers();
+  });
+  document.getElementById("6").addEventListener("click", function(){
+  number = "6";
+  show_numbers();
+  });
+  document.getElementById("7").addEventListener("click", function(){
+  number = "7";
+  show_numbers();
+  });
+  document.getElementById("8").addEventListener("click", function(){
+  number = "8";
+  show_numbers();
+  });
+  document.getElementById("9").addEventListener("click", function(){
+  number = "9";
+  show_numbers();
+  });
+  document.getElementById("0").addEventListener("click", function(){
+    var q = document.getElementById("lcd");
+    var q2 =value.length;
+    if(q2>1)
+    {
+  number = "0";
+  show_numbers();
+}
+  });
+
+	document.getElementById("multiple").addEventListener("click", mnozymy);
+
+
+function mnozymy()
+{
+var q = document.getElementById("lcd");
+var q2 =value.length;
+if(q2>1)
+{
+document.getElementById("lcd").innerHTML =  value + " * ";
+document.getElementById('multiplay').play();
+value_memory = parseInt(value);
+value_temp =" ";
+value = value + " * ";
+what = "mnoz";
+}
+}
+
+	document.getElementById("plus").addEventListener("click", function(){
+    var q = document.getElementById("lcd");
+    var q2 =value.length;
+    if(q2>1)
+    {
+	document.getElementById("lcd").innerHTML =  value + " + ";
+  document.getElementById('multiplay').play();
+	value_memory = parseInt(value);
+	value_temp =" ";
+	value = value + " + ";
+	what = "plus";
+}
+	});
+
+
+	document.getElementById("minus").addEventListener("click", function(){
+    var q = document.getElementById("lcd");
+    var q2 =value.length;
+    if(q2>1)
+    {
+	document.getElementById("lcd").innerHTML =  value + " - ";
+  document.getElementById('multiplay').play();
+	value_memory = parseInt(value);
+	value_temp =" ";
+	value = value + " - ";
+		what = "minus";
+  }
+	});
+	document.getElementById("dziel").addEventListener("click", function(){
+    var q = document.getElementById("lcd");
+    var q2 =value.length;
+    if(q2>1)
+    {
+	document.getElementById("lcd").innerHTML =  value + " / ";
+
+                document.getElementById('multiplay').play();
+	value_memory = parseInt(value);
+	value_temp =" ";
+	value = value + " / ";
+		what = "dziel";
+  }
+}
+);
+
+
+
+	document.getElementById("clear").addEventListener("click", function(){
+
+
+what = "nic";
+	value_memory = " ";
+	value = " ";
+	document.getElementById("lcd").innerHTML =  "0";
+	});
+
+	document.getElementById("result").addEventListener("click", function(){
+
+
+
+    if(what!="nic")
+    {
+
+    var value3 = parseInt(value_temp);
+    if(	what == "mnoz")
+    var results = value_memory*value3;
+    if(	what == "plus")
+    var results = value_memory+value3;
+
+    if(	what == "minus")
+    var results = value_memory-value3;
+
+
+    if(	what == "dziel")
+    {
+    var results = value_memory/value3;
+    results = results.toFixed(2) ;
+    }
+    var q2 =value_temp.length;
+
+    if(q2>1)
+    {
+    document.getElementById('accept').play();
+    what = "nic";
+    var results4="";
+    var text = results4 + results;
+    var result_color = text.fontcolor("#ff3f3d");
+    document.getElementById("lcd").innerHTML = value + " = " + result_color;
+    value=" ";
+    }
+    }
+    });
+
+
+
+
+
+
+
+}
+
+
+</script>
+
+
+
+</head>
+
+<body onload="load();">
+  <div class="container">
+<h1 id="h1"> Kalkulator wersja 1.0 </h1>
+</br>
+<table class="table">
+	<tr>
+	   <td id="lcd"colspan="4">0</td>
+	 </tr>
+	 <tr>
+	 	 <td id="blank"colspan="4"></td>
+
+	  </tr>
+	<tr>
+	   <td id="1">1</td>
+	   <td id="2">2</td>
+	   <td id="3">3</td>
+	   <td id="4">4</td>
+	</tr>
+	<tr>
+	   <td id="5">5</td>
+	   <td id="6">6</td>
+	   <td id="7">7</td>
+	   <td id="8">8</td>
+	</tr>
+	<tr>
+	   <td id="9">9</td>
+	   <td id="0">0</td>
+	   <td class="buttons" id="minus">-</td>
+	   <td class="buttons" id="plus">+</td>
+	</tr>
+	<tr>
+		<td class="buttons" id="multiple">*</td>
+		<td class="buttons" id="dziel">/</td>
+		<td class="buttons" id="clear"colspan="2">C</td>
+</tr>
+<td class="buttons" id="result"colspan="4">=</td>
+
+</table>
+</div>
+</body>
+</html>
